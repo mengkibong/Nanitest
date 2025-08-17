@@ -18,11 +18,19 @@ jobs:
       with:
         python-version: '3.9'
 
-    - name: Install Buildozer & dependencies
+    - name: Install Buildozer & Cython
       run: |
         sudo apt update
         sudo apt install -y python3-pip git zip unzip openjdk-17-jdk
         pip3 install --user buildozer cython
+
+    - name: Install Android SDK & accept licenses
+      run: |
+        wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip
+        mkdir -p $HOME/android-sdk/cmdline-tools
+        unzip cmdline-tools.zip -d $HOME/android-sdk/cmdline-tools
+        yes | $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/sdkmanager --licenses
+        yes | $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/sdkmanager "build-tools;36.0.0" "platforms;android-33"
 
     - name: Build APK
       run: |
