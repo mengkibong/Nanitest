@@ -26,15 +26,8 @@ jobs:
 
     - name: Install Android SDK & accept licenses
       run: |
-        wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip
-        mkdir -p $HOME/android-sdk/cmdline-tools
-        unzip cmdline-tools.zip -d $HOME/android-sdk/cmdline-tools
-        yes | $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/sdkmanager --licenses
-        yes | $HOME/android-sdk/cmdline-tools/cmdline-tools/bin/sdkmanager "build-tools;36.0.0" "platforms;android-33"
-
-    - name: Build APK
-      run: |
-        ~/.local/bin/buildozer android debug
+        export ANDROID_SDK_ROOT=$HOME/android-sdk
+        mkdir -p $ANDROID_SDK_ROOT/cmdline        ~/.local/bin/buildozer android debug
 
     - name: Upload APK as artifact
       uses: actions/upload-artifact@v4
