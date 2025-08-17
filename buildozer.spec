@@ -1,28 +1,23 @@
 [app]
-# Nama app
+# Maklumat app
 title = ExcelApp
 package.name = excelapp
-package.domain = org.example
+package.domain = org.nani
 source.dir = .
-source.include_exts = py,csv,kv,xlsx
+version = 0.1
+requirements = python3,kivy,pandas,openpyxl
+icon.filename = icon.png   # optional, letak icon kalau ada
 
-# Requirements Python + Kivy
-requirements = python3,kivy
-
-# Versi app
-version = 1.0.0
-
-# Minimum dan target Android API
-android.minapi = 21
-android.api = 33
-android.arch = armeabi-v7a
-
-# Ikon & splash screen (optional)
-icon.filename = %(source.dir)s/icon.png
-presplash.filename = %(source.dir)s/presplash.png
-
-# Permissions untuk baca/tulis fail di Android
-android.permissions = WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
-
-# Log level
+[buildozer]
 log_level = 2
+warn_on_root = 1
+
+[android]
+# Tetapan Android
+android.archs = arm64-v8a, armeabi-v7a
+android.api = 33
+android.minapi = 21
+android.sdk = 33
+android.ndk = 25b
+android.entrypoint = org.kivy.android.PythonActivity
+android.permissions = INTERNET
