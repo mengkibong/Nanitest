@@ -24,15 +24,21 @@ jobs:
           sudo apt install -y python3-pip git zip unzip openjdk-17-jdk
           pip3 install --user buildozer cython
 
-      - name: Install Android SDK & Build-Tools + Accept Licenses
+      - name: Install Android SDK Command Line Tools
         run: |
           export ANDROID_SDK_ROOT=$HOME/android-sdk
           mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
           wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip
           unzip -o cmdline-tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
           mv -f $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
+
+      - name: Install Android Packages (split)
+        run: |
+          export ANDROID_SDK_ROOT=$HOME/android-sdk
           yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
-          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-33" "build-tools;36.0.0"
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --no_https "platform-tools"
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --no_https "platforms;android-33"
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --no_https "build-tools;36.0.0"
 
       - name: Build APK
         run: |
