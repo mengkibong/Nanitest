@@ -22,7 +22,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y python3-pip git zip unzip openjdk-17-jdk
-          pip3 install --user buildozer cython
+          pip3 install --user --upgrade buildozer cython
 
       - name: Install Android SDK Command Line Tools
         run: |
@@ -39,12 +39,6 @@ jobs:
           $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --no_https "platform-tools"
           $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --no_https "platforms;android-33"
           $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --no_https "build-tools;36.0.0"
-
-      - name: Setup Buildozer / Python-for-Android
-        run: |
-          export ANDROID_SDK_ROOT=$HOME/android-sdk
-          export PATH=$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/build-tools/36.0.0:$PATH
-          ~/.local/bin/buildozer android setup
 
       - name: Build APK
         run: |
