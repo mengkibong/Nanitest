@@ -40,12 +40,17 @@ jobs:
           $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --no_https "platforms;android-33"
           $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --no_https "build-tools;36.0.0"
 
+      - name: Setup Buildozer / Python-for-Android
+        run: |
+          export ANDROID_SDK_ROOT=$HOME/android-sdk
+          export PATH=$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/build-tools/36.0.0:$PATH
+          ~/.local/bin/buildozer android setup
+
       - name: Build APK
         run: |
           export ANDROID_SDK_ROOT=$HOME/android-sdk
           export PATH=$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/build-tools/36.0.0:$PATH
           ~/.local/bin/buildozer android clean
-          ~/.local/bin/buildozer android update
           ~/.local/bin/buildozer android debug
 
       - name: Upload APK as artifact
