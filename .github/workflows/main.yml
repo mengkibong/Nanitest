@@ -32,7 +32,7 @@ jobs:
           unzip -o cmdline-tools.zip -d $ANDROID_SDK_ROOT/cmdline-tools
           mv -f $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
 
-      - name: Install Android Packages (split)
+      - name: Install Android Packages & Accept Licenses
         run: |
           export ANDROID_SDK_ROOT=$HOME/android-sdk
           yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
@@ -45,6 +45,7 @@ jobs:
           bash -c 'export ANDROID_SDK_ROOT=$HOME/android-sdk && \
           export PATH=$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/build-tools/36.0.0:$PATH && \
           ~/.local/bin/buildozer android clean && \
+          ~/.local/bin/buildozer android update && \
           ~/.local/bin/buildozer android debug'
 
       - name: Upload APK as artifact
