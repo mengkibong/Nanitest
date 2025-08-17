@@ -3,18 +3,17 @@
 title = ExcelApp
 package.name = excelapp
 package.domain = org.example
-
-# Script utama
-source.include_exts = py,csv,kv,xlsx
 source.dir = .
+source.include_exts = py,csv,kv,xlsx
 
-# Requirements
+# Requirements Python + Kivy
 requirements = python3,kivy
 
-# Versi android minimum
-android.minapi = 21
+# Versi app
+version = 1.0.0
 
-# Versi android target
+# Minimum dan target Android API
+android.minapi = 21
 android.api = 33
 android.arch = armeabi-v7a
 
@@ -22,8 +21,8 @@ android.arch = armeabi-v7a
 icon.filename = %(source.dir)s/icon.png
 presplash.filename = %(source.dir)s/presplash.png
 
-# Permissions (jika perlukan baca/tulis file)
+# Permissions untuk baca/tulis fail di Android
 android.permissions = WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
 
-# Buildozer log level
+# Log level
 log_level = 2
