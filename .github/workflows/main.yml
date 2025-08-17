@@ -44,7 +44,7 @@ jobs:
         run: |
           bash -c 'export ANDROID_SDK_ROOT=$HOME/android-sdk && \
           export PATH=$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/build-tools/36.0.0:$PATH && \
-          buildozer android clean && \
+          ~/.local/bin/buildozer android clean && \
           ~/.local/bin/buildozer android debug'
 
       - name: Upload APK as artifact
